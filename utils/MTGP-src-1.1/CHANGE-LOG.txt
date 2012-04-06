@@ -1,0 +1,36 @@
+ver. 1.1
+-------
+Parameter files of mtgp32 are changed for better dimension of
+equidistributions.  This change cause changes of outputs, but this not
+cause effect on floating point outputs. The changes affect only on
+9 LSB bits of unsigned integers and the 9 LSB bits are discarded when
+converting to floating points.  You can also use old paramter files
+instead of new ones. This change reflects the improvement of MTGPDC
+ver. 0.3.
+
+Sample files for cuda now can be compiled in CUDA 4.0 environment.
+
+ver. 1.0.2
+-------
+change cuda-sample MEXP form 23209 and 44497 to 11213.
+This is because CUDA occupancy of the latter is larger
+than those of the formers.
+
+ver. 1.0.1
+-------
+fixed 64bit init_by_array, init_by_str bug.
+
+ver. 1.0
+-------
+The release version.
+add using texture sample files.
+add tools directory.
+
+ver. 0.2
+-------
+add mtgp32 files
+add period certification to initialization.
+
+ver. 0.1
+-------
+start

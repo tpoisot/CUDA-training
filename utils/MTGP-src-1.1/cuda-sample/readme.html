@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" />
+    <meta name="keywords" content="tiny mt" />
+    <title>MTGP CUDA SAMPLE</title>
+  </head>
+  <body>
+    <h2>MTGP CUDA SAMPLE</h2>
+    <h2>READ ME FIRST</h2>
+
+    <p>
+      This directory contains some sample programs of MTGP
+      for CUDA. Files in this directory are just samples,
+      feel free to copy and change.
+    </p>
+    <p>
+      I checked these sample files under the environment of CUDA 4.0,
+      But this does not mean these samples use new features of CUDA 4.0.
+    </p>
+
+    <h2>FILES</h2>
+
+    <table border="1">
+      <caption>Files</caption>
+      <tr>
+	<th>File</th><th>explanation</th>
+      </tr>
+      <tr>
+	<td>mtgp-util.cuh</td>
+	<td>utility functions. This file includes ccuda functions,
+	  which are wrapper functions of cuda functions.</td>
+      </tr>
+      <tr>
+	<td>mtgp-util.cu</td>
+	<td>utility functions which are not inline.
+	   get_suitable_block_num function, defined in this file,
+	  is not reliable at all.</td>
+      </tr>
+      <tr>
+	<td>mtgp32-cuda.cu</td>
+	<td>This is a simple sample for cuda. Output is 32-bit width,
+	  MEXP is 11213 and uses constant memories for look-up table.</td>
+      </tr>
+      <tr>
+	<td>mtgp32-cuda-tex.cu</td>
+	<td>This sample uses texture reference for look-up table.
+	  Output is 32-bit width, MEXP is 11213.</td>
+      </tr>
+      <tr>
+	<td>mtgp32-cuda-minmem.cu</td>
+	<td>This sample uses less shared memories for internal state.
+	  uses texture reference, MEXP is 11213, Output is 32-bit width</td>
+      </tr>
+      <tr>
+	<td>mtgp32-cuda23209-tex.cu</td>
+	<td>This sample uses larger internal state and has longer period.
+	  uses texture reference, MEXP is 23209, Output is 32-bit width</td>
+      </tr>
+      <tr>
+	<td>mtgp64-cuda.cu</td>
+	<td>This is a simple sample for cuda. Output is 64-bit width,
+	  MEXP is 11213 and uses constant memories for look-up table.</td>
+      </tr>
+      <tr>
+	<td>mtgp64-cuda-tex.cu</td>
+	<td>This sample uses texture reference for look-up table.
+	  Output is 64-bit width, MEXP is 11213.</td>
+      </tr>
+      <tr>
+	<td>mtgp64-cuda13-tex.cu</td>
+	<td>This sample uses double precision floating point operation in
+	  kernel program. needs compute capability 1.3 or over.
+	  Output is 64-bit width, MEXP is 11213, use texture reference for
+	  look-up table.</td>
+      </tr>
+      <tr>
+	<td>mtgp32dc-param-11213.c</td>
+	<td>parameter file made by MTGPDC (and some changes) </td>
+      </tr>
+      <tr>
+	<td>mtgp64dc-param-11213.c</td>
+	<td>parameter file mada by MTGPDC (and some changes) </td>
+      </tr>
+    </table>
+
+    <h2>Executable Files</h2>
+    <p>
+    sample32-cuda-xxx or sample64-cuda-xxx are executable files.  The
+    executable files needs two arguments: number of block and number
+    of outputs.  Invoking without arguments, these executable files
+    show suitable block number for GPU device 0, but this block number
+    is not reliable.</p>
+  </body>
+</html>
