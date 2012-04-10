@@ -21,7 +21,6 @@ __global__ void mm_kernel(float *d_m, float *d_n, float *d_p, int size)
  * tous les threads dans un bloc peuvent se partager la valeur
  * donner la valeur dans 
  * 
- * 
  * __shared_int sum;
  * if (threadIdx.x == 0)
  * {

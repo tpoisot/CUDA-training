@@ -12,6 +12,7 @@
 #define THREADS              256
 #define PI                   3.1415926535 // known value of pi
 
+// curandState = etat du generateur de nombres aleatoires
 __global__ void gpu_monte_carlo(float *estimate, curandState *states)
 {
     unsigned int tid = threadIdx.x + blockDim.x * blockIdx.x;
