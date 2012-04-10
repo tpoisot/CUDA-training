@@ -5,11 +5,21 @@
 
 #define N       1000000
 #define BLOCKS  1000
-#define THREADS 1000  
+#define THREADS 512  
+
+/*
+ * Syntaxe : <<<BLOCKS,THREADS>>>
+ * Pour chaque block, creation de copies distinctes avec un threadIdx.n
+ * BLOCK   : petit bout de memoire de 14 bytes qui peuvent etre partages dans les threads
+ * THREAD  : sous-division des threads
+ * Nombre limite de threads -- 512, max 1024
+ */
+
+// Possible aussi de se referer aux x et aux y
 
 __global__ void add(int *a, int *b, int *c)
 {
-    int tid = threadIdx.x + blockDim.x * blockIdx.x; // bloakcDim.x := 1000
+    int tid = threadIdx.x + blockDim.x * blockIdx.x; // blockDim.x := 1000
     if (tid < N)
     {
         c[tid] = a[tid] + b[tid];
