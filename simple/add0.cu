@@ -14,6 +14,13 @@ int main(int argc, char **argv)
     int *dev_c;
     cudaMalloc((void**)&dev_c, sizeof(int));
     cuda_add<<<1,1>>>(2, 2, dev_c);
+    /*
+     * Arguments pour cudaMemcpy
+     * 1 : destination
+     * 2 : memoire sur le device
+     * 3 : taille du bloc
+     * 4 : direction de la copie
+     */
     cudaMemcpy(&c, dev_c, sizeof(int), cudaMemcpyDeviceToHost);
     printf("Almighty CUDA's answer: 2 + 2 = %d.\n", c);
     cudaFree(dev_c);
