@@ -1,8 +1,14 @@
 //: nvcc add1.cu -o add1
 
+/*
+ * Meme programme que add0 MAIS
+ * on add les elements des vecteurs entre eux
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 
+// definition de la taille des vecteurs
 #ifndef N
 #define N 100
 #endif
@@ -42,6 +48,12 @@ int main(int argc, char **argv)
 
     // Call CUDA add:
     add<<<N,1>>>(d_a, d_b, d_c);
+    /*
+     * Signification du <<<N,1>>>
+     * N : nombre de blocs
+     * Pour chaque bloc, blockIdx.n, n est le numero du bloc
+     * N doit etre inferieur a 65000 (verifier la taille exacte) 
+     */
 
     // Copy from the device to the host:
     cudaMemcpy(h_c, d_c, N * sizeof(int), cudaMemcpyDeviceToHost);
