@@ -16,6 +16,23 @@ __global__ void mm_kernel(float *d_m, float *d_n, float *d_p, int size)
     d_p[row * size + col] = val;
 }
 
+/*
+ * En declarant une variable comme __shared
+ * tous les threads dans un bloc peuvent se partager la valeur
+ * donner la valeur dans 
+ * 
+ * __shared_int sum;
+ * if (threadIdx.x == 0)
+ * {
+ *  sum = 0; // ne peut etre initialisee que par le premier, par de maniere globale
+ * }
+ * __syncthread();
+ * atomicAdd(&sum, 5); // la memoire partagee n'est pas changee par plusieurs threads
+ * __syncthread(); // on attend que les autres threads soient OK pour passer a la suite
+ * 
+ * atomicAdd est VRAIMENT lent
+ */
+
 void multiply(float *m, float *n, float *p, int size)
 {
     // Pointers on the device:
