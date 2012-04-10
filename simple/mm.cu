@@ -6,8 +6,8 @@
 
 __global__ void mm_kernel(float *d_m, float *d_n, float *d_p, int size)
 {
-    const int row = threadIdx.y;
-    const int col = threadIdx.x;
+    const int row = blockIdx.y;
+    const int col = blockIdx.x;
     float val = 0.0;
     for (int i = 0; i < size; ++i)
     {
@@ -20,7 +20,9 @@ void multiply(float *m, float *n, float *p, int size)
 {
     // Pointers on the device:
     float *d_m, *d_n, *d_p;
-
+    
+    // Matrice allouee directement dans un vecteur unique
+    // sinon un nombre enorme de cuda malloc
     const int nbytes = (size * size) * sizeof(float);
 
     cudaMalloc((void**)&d_m, nbytes);
@@ -30,10 +32,13 @@ void multiply(float *m, float *n, float *p, int size)
     cudaMemcpy(d_m, m, nbytes, cudaMemcpyHostToDevice);
     cudaMemcpy(d_n, n, nbytes, cudaMemcpyHostToDevice);
 
+    // definit une grid
     dim3 dimGrid(1, 1);
+    // definit un block de size by size
     dim3 dimBlock(size, size);
-    mm_kernel<<<dimGrid,dimBlock>>>(d_m, d_n, d_p, size);
-
+    // balance sur les GPU
+    mm_kernel<<<dimBlock,dimGrid>>>(d_m, d_n, d_p, size);
+    
     cudaMemcpy(p, d_p, nbytes, cudaMemcpyDeviceToHost);
 
     cudaFree(d_m);
